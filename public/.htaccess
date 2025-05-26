@@ -1,0 +1,10 @@
+RewriteEngine On
+
+RewriteRule ^test_htaccess$ test.html [L]
+
+# Если запрошенный файл или папка существуют — отдать их напрямую
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Иначе — перенаправить все запросы на index.php
+RewriteRule ^ index.php [QSA,L]
