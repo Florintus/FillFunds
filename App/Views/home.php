@@ -193,6 +193,10 @@
         <a href="/logs">История изменений</a>
     </nav>
 
+    <button onclick="document.getElementById('calculator').style.display='block'" style="margin-bottom: 15px;">Калькулятор</button>
+    <?php include __DIR__ . '/partials/calculator.php'; ?>
+
+
     <h2>Список расходов</h2>
 
     <?php if (!empty($expenses)): ?>

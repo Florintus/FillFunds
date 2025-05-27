@@ -9,12 +9,12 @@ class Database {
     private $pdo;
     
     private function __construct() {
-        $config = require __DIR__ . '/../config/config.php';
-        $db = $config['db'];
 
-        $dsn = "pgsql:host={$db['host']};port={$db['port']};dbname={$db['dbname']};";
+        $dsn = 'pgsql:host=127.127.126.13;port=5432;dbname=FinancyBD';
+                $dbUser = 'florintus';
+                $dbPass = '12345';
         try {
-            $this->pdo = new PDO($dsn, $db['user'], $db['password'], [
+            $this->pdo = new PDO($dsn, $dbUser, $dbPass, [
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
             ]);
         } catch (PDOException $e) {
