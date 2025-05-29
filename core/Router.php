@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Core;
 // Ядро роутера — Router
 
 class Router
