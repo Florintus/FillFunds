@@ -10,8 +10,11 @@ class Logs {
         $this->db = Database::getInstance()->getConnection();
     }
 
-    public function getAll() {
-        $stmt = $this->db->query('SELECT * FROM expenses_log ORDER BY changed_at DESC');
+    public function getAll() 
+    {
+        $pdo = Database::getInstance()->getConnection();
+        $stmt = $pdo->prepare('SELECT * FROM expenses_log ORDER BY changed_at DESC');
+        $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
