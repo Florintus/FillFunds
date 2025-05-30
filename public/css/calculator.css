@@ -1,0 +1,99 @@
+:root {
+    --bg-color: #f0f0f0;
+    --text-color: #000;
+    --display-bg: #fff;
+    --display-color: #000;
+    --button-bg: #e0e0e0;
+    --button-color: #000;
+    --button-hover: #ccc;
+    --history-bg: #fff;
+    --history-color: #333;
+}
+
+body.dark {
+    --bg-color: #1e1e1e;
+    --text-color: #fff;
+    --display-bg: #2c2c2c;
+    --display-color: #fff;
+    --button-bg: #2c2c2c;
+    --button-color: #fff;
+    --button-hover: #3d3d3d;
+    --history-bg: #2c2c2c;
+    --history-color: #ccc;
+}
+
+#calculator {
+    position: fixed;
+    top: 100px;
+    left: 100px;
+    width: 320px;
+    background: var(--bg-color);
+    border-radius: 10px;
+    padding: 10px;
+    color: var(--text-color);
+    font-family: sans-serif;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+#calcHeader {
+    cursor: move;
+    padding: 5px;
+    text-align: center;
+    font-weight: bold;
+    background: var(--button-bg);
+    border-radius: 8px 8px 0 0;
+}
+
+#calcHeader button {
+    float: right;
+    background: none;
+    color: var(--button-color);
+    border: none;
+    font-size: 16px;
+}
+
+#calcDisplay {
+    width: 100%;
+    background: var(--display-bg);
+    color: var(--display-color);
+    border: none;
+    font-size: 24px;
+    text-align: right;
+    margin-bottom: 5px;
+}
+
+#calcTooltip {
+    margin-bottom: 5px;
+}
+
+#calcHistory {
+    height: 60px;
+    overflow-y: auto;
+    font-size: 12px;
+    background: var(--history-bg);
+    color: var(--history-color);
+    padding: 5px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+}
+
+#calcButtons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 5px;
+}
+
+#calcButtons button {
+    background: var(--button-bg);
+    border: none;
+    padding: 15px;
+    color: var(--button-color);
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#calcButtons button:hover {
+    background: var(--button-hover);
+}
