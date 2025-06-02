@@ -2,10 +2,6 @@
 
 namespace App\Models;
 
-require_once __DIR__ . '/../../core/Database.php';
-
-// Ensure the Database class is loaded before using it
-
 use Core\Database;
 use PDO;
 use PDOException;
