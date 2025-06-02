@@ -2,7 +2,9 @@
     "name": "flori/financy.florintus",
     "autoload": {
         "psr-4": {
-            "Flori\\FinancyFlorintus\\": "src/"
+            "App\\": "App/",
+            "Core\\": "Core/",
+            "Config\\": "Config/"
         }
     },
     "require": {}
