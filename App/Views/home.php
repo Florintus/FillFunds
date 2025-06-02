@@ -193,7 +193,6 @@
         <a href="/logs">История изменений</a>
     </nav>
 
-    <button onclick="document.getElementById('calculator').style.display='block'" style="margin-bottom: 15px;">Калькулятор</button>
     <?php include __DIR__ . '/partials/calculator.php'; ?>
 
 
