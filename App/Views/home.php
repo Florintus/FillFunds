@@ -193,6 +193,9 @@
         <a href="/logs">История изменений</a>
     </nav>
 
+    <?php include __DIR__ . '/partials/calculator.php'; ?>
+
+
     <h2>Список расходов</h2>
 
     <?php if (!empty($expenses)): ?>
