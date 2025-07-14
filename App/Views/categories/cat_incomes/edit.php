@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Добавить единицу измерения - FillFunds</title>
+    <title>Редактировать категорию доходов - FillFunds</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -143,7 +143,7 @@
                         <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
                         </svg>
-                        <a href="/categories/units" class="text-gray-600 hover:text-blue-600 transition-colors ml-1 md:ml-2">Единицы измерения</a>
+                        <a href="/categories/incomes" class="text-gray-600 hover:text-blue-600 transition-colors ml-1 md:ml-2">Категории доходов</a>
                     </div>
                 </li>
                 <li>
@@ -151,7 +151,7 @@
                         <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
                         </svg>
-                        <span class="text-gray-500 ml-1 md:ml-2">Добавить единицу</span>
+                        <span class="text-gray-500 ml-1 md:ml-2">Редактировать</span>
                     </div>
                 </li>
             </ol>
@@ -160,14 +160,14 @@
         <!-- Page Header -->
         <div class="mb-8">
             <div class="flex items-center space-x-3 mb-4">
-                <div class="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center">
+                <div class="w-12 h-12 bg-gradient-to-br from-emerald-500 to-green-600 rounded-xl flex items-center justify-center">
                     <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
                     </svg>
                 </div>
                 <div>
-                    <h1 class="text-3xl font-bold text-gray-900">Добавить единицу измерения</h1>
-                    <p class="text-gray-600 mt-1">Создайте новую единицу измерения для учета товаров и услуг</p>
+                    <h1 class="text-3xl font-bold text-gray-900">Редактировать категорию доходов</h1>
+                    <p class="text-gray-600 mt-1">Измените информацию о категории доходов</p>
                 </div>
             </div>
         </div>
@@ -190,39 +190,39 @@
 
         <!-- Form Card -->
         <div class="bg-white rounded-2xl shadow-lg p-8 card-hover">
-            <form method="post" action="/categories/store" class="space-y-6">
-                <!-- Hidden Type Field -->
-                <input type="hidden" name="type" value="unit">
+            <form method="post" action="/categories/incomes/update" class="space-y-6">
+                <input type="hidden" name="id" value="<?= $data['id'] ?>">
                 
-                <!-- Unit Name -->
+                <!-- Category Name -->
                 <div>
                     <label for="name" class="block text-sm font-medium text-gray-700 mb-2">
-                        Название единицы измерения
+                        Название категории
                     </label>
                     <input 
                         type="text" 
                         id="name"
                         name="name" 
+                        value="<?= htmlspecialchars($data['name']) ?>" 
                         required 
-                        class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors"
-                        placeholder="Например: кг, шт, л, м²"
+                        class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-colors"
+                        placeholder="Например: Зарплата, Фриланс, Инвестиции"
                     >
-                    <p class="mt-1 text-sm text-gray-500">Укажите краткое обозначение единицы измерения</p>
+                    <p class="mt-1 text-sm text-gray-500">Укажите наименование категории доходов</p>
                 </div>
 
                 <!-- Action Buttons -->
                 <div class="flex flex-col sm:flex-row gap-4 pt-6">
                     <button 
-                        type="submit" 
-                        class="flex-1 px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-medium rounded-xl hover:from-indigo-700 hover:to-purple-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                        type="submit"
+                        class="flex-1 px-6 py-3 bg-gradient-to-r from-emerald-600 to-green-600 text-white font-medium rounded-xl hover:from-emerald-700 hover:to-green-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
                     >
                         <svg class="w-5 h-5 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                         </svg>
-                        Сохранить единицу
+                        Обновить категорию
                     </button>
                     <a 
-                        href="/categories/units" 
+                        href="/categories/incomes" 
                         class="flex-1 px-6 py-3 bg-gray-100 text-gray-700 font-medium rounded-xl hover:bg-gray-200 transition-colors text-center"
                     >
                         <svg class="w-5 h-5 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -234,38 +234,18 @@
             </form>
         </div>
 
-        <!-- Info Card -->
-        <div class="mt-6 bg-indigo-50 rounded-xl p-6">
+        <!-- Warning Card -->
+        <div class="mt-6 bg-yellow-50 rounded-xl p-6">
             <div class="flex">
                 <div class="flex-shrink-0">
-                    <svg class="h-5 w-5 text-indigo-400" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+                    <svg class="h-5 w-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
                     </svg>
                 </div>
                 <div class="ml-3">
-                    <h3 class="text-sm font-medium text-indigo-800">Примеры единиц измерения</h3>
-                    <div class="mt-2 text-sm text-indigo-700">
-                        <p>Распространенные единицы, которые можно добавить:</p>
-                        <div class="mt-3 grid grid-cols-2 gap-3">
-                            <div>
-                                <p class="font-medium">Масса и объем:</p>
-                                <ul class="mt-1 list-disc list-inside space-y-1">
-                                    <li>кг — килограммы</li>
-                                    <li>г — граммы</li>
-                                    <li>л — литры</li>
-                                    <li>мл — миллилитры</li>
-                                </ul>
-                            </div>
-                            <div>
-                                <p class="font-medium">Количество и размеры:</p>
-                                <ul class="mt-1 list-disc list-inside space-y-1">
-                                    <li>шт — штуки</li>
-                                    <li>м — метры</li>
-                                    <li>м² — квадратные метры</li>
-                                    <li>упак — упаковки</li>
-                                </ul>
-                            </div>
-                        </div>
+                    <h3 class="text-sm font-medium text-yellow-800">Внимание</h3>
+                    <div class="mt-2 text-sm text-yellow-700">
+                        <p>Изменение названия категории доходов может повлиять на связанные с ней транзакции и отчеты. Убедитесь, что новое название корректно отражает тип доходов.</p>
                     </div>
                 </div>
             </div>
@@ -273,11 +253,11 @@
 
         <!-- Back Link -->
         <div class="mt-8">
-            <a href="/categories/units" class="inline-flex items-center text-gray-600 hover:text-blue-600 transition-colors">
+            <a href="/categories/incomes" class="inline-flex items-center text-gray-600 hover:text-blue-600 transition-colors">
                 <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
                 </svg>
-                Вернуться к единицам измерения
+                Вернуться к категориям доходов
             </a>
         </div>
     </main>
@@ -350,7 +330,7 @@
                     <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                     <path class="opacity-75" fill="currentColor" d="m4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                 </svg>
-                Сохранение...
+                Обновление...
             `;
             submitButton.disabled = true;
         });

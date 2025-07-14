@@ -58,4 +58,15 @@ class IncomeController
         header('Location: /incomes');
         exit;
     }
-}
+
+    public function delete() 
+    {
+        $id = $_GET['id'] ?? null;
+        if ($id) {
+            $income = new Income();
+            $income->delete($id);
+        }
+        header('Location: /incomes');
+        exit;
+    }
+ }

@@ -41,4 +41,10 @@ class Income
             ':date' => $data['date'],
         ]);
     }
+    
+    public function delete($id) {
+        $stmt = $this->db->prepare("DELETE FROM incomes WHERE id = :id");
+        $stmt->execute([':id' => $id]);
+    }
+
 }

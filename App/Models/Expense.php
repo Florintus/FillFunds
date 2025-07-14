@@ -110,4 +110,8 @@ class Expense {
         ]);
     }
 
+    public function delete($id) {
+        $stmt = $this->db->prepare("DELETE FROM expenses WHERE id = :id");
+        $stmt->execute([':id' => $id]);
+    }
 }

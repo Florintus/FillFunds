@@ -17,6 +17,28 @@ h2 {
     margin-bottom: 30px;
 }
 
+/* body {
+    font-family: 'Playfair Display', serif;
+    background-color: #f8f5f0;
+    color: #3e2f2f;
+    background-image: url('/public/images/victorian-pattern.png');
+    background-repeat: repeat;
+    padding-top: 80px;
+    padding-bottom: 70px;
+}
+
+h1,
+h2,
+h5 {
+    font-family: 'Playfair Display', serif;
+    color: #4b2e2e;
+    border-bottom: 2px solid #a1866f;
+    padding-bottom: 0.3em;
+    margin-bottom: 1em;
+    text-shadow: 1px 1px 0 #ddd;
+} */
+
+
 /* Навигация */
 nav {
     margin-bottom: 25px;
@@ -366,4 +388,156 @@ body.dark .add-expense-page button[type="submit"] {
 
 body.dark .add-expense-page button[type="submit"]:hover {
     background-color: #4b75c2;
+}
+
+/* ===== ФИКСИРОВАННЫЙ HEADER ===== */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    /* чтобы Header всегда был поверх основного контента */
+    background-color: #ffffff;
+    /* либо (в темной теме) #121212 или любой другой фон */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Отступ сверху для основного содержимого, 
+   равный примерно высоте header (например, 70px). 
+   Скорректируйте под фактическую высоту вашего header */
+body {
+    padding-top: 70px;
+}
+
+/* ===== ФИКСИРОВАННЫЙ FOOTER ===== */
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    /* чтобы Footer всегда был поверх контента, если он перекрывает */
+    background-color: #ffffff;
+    /* либо (в темной теме) #121212 или любой другой фон */
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Отступ снизу для основного содержимого (чтобы текст не «упирался» в footer) */
+body {
+    padding-bottom: 60px;
+    /* подберите значение, равное высоте footer (например, 60px) */
+}
+
+/* ===== ТЕМНАЯ ТЕМА: HEADER и FOOTER ===== */
+body.dark header {
+    background-color: #121212;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+body.dark footer {
+    background-color: #121212;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Уточним, чтобы nav внутри header занимал всю ширину */
+header .navbar {
+    width: 100%;
+}
+
+/* ===== ГОРИЗОНТАЛЬНОЕ МЕНЮ В HEADER ===== */
+header nav ul {
+    list-style: none;
+    /* убираем маркеры */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    /* располагаем li в одну строку */
+    gap: 15px;
+    /* расстояние между пунктами */
+    align-items: center;
+    /* выравнивание по высоте (если будут иконки) */
+}
+
+header nav ul li {
+    margin: 0;
+    /* сбрасываем любые отступы у li */
+    padding: 0;
+}
+
+/* ===== ГОРИЗОНТАЛЬНЫЕ ССЫЛКИ В FOOTER ===== */
+footer ul {
+    list-style: none;
+    /* убираем точки */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    /* располагаем li в одну строку */
+    gap: 15px;
+    /* расстояние между пунктами */
+    flex-wrap: wrap;
+    /* если ссылок много, позволяем перенос */
+    align-items: center;
+}
+
+footer ul li {
+    margin: 0;
+    padding: 0;
+}
+
+section {
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 3px double #a1866f;
+    padding: 30px;
+    margin-bottom: 40px;
+    box-shadow: 4px 4px 10px rgba(102, 67, 33, 0.3);
+    border-radius: 12px;
+}
+
+ul,
+ol {
+    padding-left: 20px;
+    font-size: 1.1em;
+}
+
+a.btn,
+button,
+input[type="submit"] {
+    background-color: #6e3c3c;
+    border: 1px solid #3e2f2f;
+    color: #fefefe;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 6px;
+    text-shadow: 1px 1px 1px #000;
+    font-family: 'Playfair Display', serif;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+a.btn:hover,
+button:hover,
+input[type="submit"]:hover {
+    background-color: #8c5b5b;
+    transform: scale(1.02);
+}
+
+body.dark {
+    background-color: #2b1f1a;
+    color: #e0d5c4;
+    background-image: url('/public/images/victorian-dark-pattern.png');
+}
+
+body.dark section {
+    background-color: rgba(44, 33, 28, 0.9);
+    border-color: #7b5c3b;
+    box-shadow: 0 0 10px rgba(192, 157, 123, 0.2);
+}
+
+body.dark a.btn {
+    background-color: #a1866f;
+    color: #2b1f1a;
+}
+
+body.dark a.btn:hover {
+    background-color: #c6b095;
 }

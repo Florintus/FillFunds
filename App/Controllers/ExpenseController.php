@@ -17,7 +17,7 @@ class ExpenseController
     public function create()
     {
         $accounts = new Account();
-        require_once __DIR__ . '/../Views/expenses/create.php';
+        require_once __DIR__ . '/../Views/expense/create.php';
     }
 
     public function store(): void
@@ -36,7 +36,7 @@ class ExpenseController
         $expense = new Expense();
         $expense->create($name, $amount, $date, $note);
 
-        header('Location: /expenses');
+        header('Location: /expense');
         exit;
     }
 
@@ -46,5 +46,15 @@ class ExpenseController
         $expenses = $expense->getAll();
 
         require_once __DIR__ . '/../Views/expense/index.php';
+    }
+
+    public function delete() {
+        $id = $_GET['id'] ?? null;
+        if ($id) {
+            $expense = new Expense();
+            $expense->delete($id);
+        }
+        header('Location: /expenses');
+        exit;
     }
 }

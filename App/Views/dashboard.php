@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>История изменений - FillFunds</title>
+    <title>Панель управления - FillFunds</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -63,6 +63,9 @@
         .dark .hover\:bg-gray-50:hover {
             background-color: #334155;
         }
+        .dark .hover\:bg-blue-50:hover {
+            background-color: #1e3a8a;
+        }
         .dark #theme-menu {
             background-color: #1e293b;
             border-color: #334155;
@@ -109,23 +112,19 @@
                         <h1 class="text-2xl font-bold text-gray-900">FillFunds</h1>
                     </div>
                     
-                    <!-- Breadcrumbs -->
-                    <nav class="hidden md:flex">
-                        <ol class="flex items-center space-x-2 text-sm">
-                            <li><a href="/" class="text-gray-500 hover:text-gray-700">Главная</a></li>
-                            <li class="text-gray-400">/</li>
-                            <li class="text-gray-900 font-medium">История изменений</li>
-                        </ol>
-                    </nav>
+                    <!-- Welcome Message -->
+                    <div class="hidden lg:block">
+                        <p class="text-sm text-gray-600">Добро пожаловать в домашнюю бухгалтерию!</p>
+                    </div>
                 </div>
 
                 <div class="flex items-center space-x-4">
-                    <!-- Quick Action -->
-                    <a href="/" class="hidden md:flex items-center px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-medium rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all">
+                    <!-- Quick Add Button -->
+                    <a href="/add" class="hidden md:flex items-center px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-medium rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all">
                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                         </svg>
-                        Вернуться на главную
+                        Добавить расход
                     </a>
 
                     <!-- Theme Switcher -->
@@ -179,7 +178,7 @@
             <nav class="p-4">
                 <ul class="space-y-2">
                     <li>
-                        <a href="/" class="flex items-center space-x-3 p-3 text-gray-700 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition-colors">
+                        <a href="/" class="flex items-center space-x-3 p-3 text-blue-600 bg-blue-50 rounded-lg font-medium">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z"></path>
                             </svg>
@@ -187,7 +186,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="/logs" class="flex items-center space-x-3 p-3 text-yellow-600 bg-yellow-50 rounded-lg font-medium">
+                        <a href="/logs" class="flex items-center space-x-3 p-3 text-gray-700 rounded-lg hover:bg-yellow-50 hover:text-yellow-600 transition-colors">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
@@ -245,142 +244,79 @@
                 <!-- Page Header -->
                 <div class="flex justify-between items-center mb-8">
                     <div>
-                        <h2 class="text-3xl font-bold text-gray-900">История изменений</h2>
-                        <p class="text-gray-600 mt-1">Аудит всех операций и изменений в системе</p>
+                        <h2 class="text-3xl font-bold text-gray-900">Панель управления</h2>
+                        <p class="text-gray-600 mt-1">Обзор ваших финансов и операций</p>
                     </div>
                     <div class="flex space-x-3">
-                        <button class="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
-                            <svg class="w-4 h-4 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path>
+                        <a href="/add" class="md:hidden px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                             </svg>
-                            Фильтры
-                        </button>
-                        <button class="px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all">
-                            <svg class="w-4 h-4 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                            </svg>
-                            Экспорт
-                        </button>
+                        </a>
                     </div>
                 </div>
 
-                <!-- Statistics Cards -->
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
-                        <div class="flex items-center">
-                            <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-                                <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                                </svg>
-                            </div>
-                            <div class="ml-4">
-                                <p class="text-sm font-medium text-gray-600">Создано</p>
-                                <p class="text-2xl font-bold text-gray-900"><?= count(array_filter($logs, fn($log) => $log['operation'] === 'create')) ?></p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
-                        <div class="flex items-center">
-                            <div class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center">
-                                <svg class="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
-                                </svg>
-                            </div>
-                            <div class="ml-4">
-                                <p class="text-sm font-medium text-gray-600">Изменено</p>
-                                <p class="text-2xl font-bold text-gray-900"><?= count(array_filter($logs, fn($log) => $log['operation'] === 'update')) ?></p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
-                        <div class="flex items-center">
-                            <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center">
-                                <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                                </svg>
-                            </div>
-                            <div class="ml-4">
-                                <p class="text-sm font-medium text-gray-600">Удалено</p>
-                                <p class="text-2xl font-bold text-gray-900"><?= count(array_filter($logs, fn($log) => $log['operation'] === 'delete')) ?></p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
-                        <div class="flex items-center">
-                            <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
-                                <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-                                </svg>
-                            </div>
-                            <div class="ml-4">
-                                <p class="text-sm font-medium text-gray-600">Всего записей</p>
-                                <p class="text-2xl font-bold text-gray-900"><?= count($logs) ?></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Change Log Table -->
+                <!-- Expenses Table -->
                 <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
                     <div class="px-6 py-4 border-b border-gray-200">
-                        <h3 class="text-lg font-semibold text-gray-900">Журнал изменений</h3>
+                        <h3 class="text-lg font-semibold text-gray-900">Список расходов</h3>
                     </div>
 
-                    <?php if (!empty($logs)): ?>
+                    <?php if (!empty($expenses)): ?>
                         <div class="overflow-x-auto custom-scrollbar">
                             <table class="w-full">
                                 <thead class="bg-gray-50">
                                     <tr>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Операция</th>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Было</th>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Стало</th>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Дата изменения</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Дата</th>
+                                        <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Сумма</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Категория</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Описание</th>
+                                        <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Действия</th>
                                     </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200">
-                                    <?php foreach ($logs as $log): ?>
+                                    <?php foreach ($expenses as $expense): ?>
                                         <tr class="table-row">
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                <?php
-                                                    $operationConfig = [
-                                                        'create' => ['text' => 'Создание', 'color' => 'bg-green-100 text-green-800', 'icon' => 'M12 4v16m8-8H4'],
-                                                        'update' => ['text' => 'Изменение', 'color' => 'bg-yellow-100 text-yellow-800', 'icon' => 'M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z'],
-                                                        'delete' => ['text' => 'Удаление', 'color' => 'bg-red-100 text-red-800', 'icon' => 'M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16']
-                                                    ];
-                                                    $config = $operationConfig[$log['operation']] ?? $operationConfig['update'];
-                                                ?>
-                                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium <?= $config['color'] ?>">
-                                                    <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="<?= $config['icon'] ?>"></path>
-                                                    </svg>
-                                                    <?= $config['text'] ?>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                                <?= date('d.m.Y', strtotime($expense['date'])) ?>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-right">
+                                                <span class="text-sm font-medium text-red-600">
+                                                    -<?= number_format($expense['amount'], 2, ',', ' ') ?> ₽
                                                 </span>
                                             </td>
-                                            <td class="px-6 py-4">
-                                                <div class="text-sm text-gray-900">
-                                                    <div class="mb-1"><strong>Сумма:</strong> <?= htmlspecialchars($log['old_amount']) ?> ₽</div>
-                                                    <div class="mb-1"><strong>Категория:</strong> <?= htmlspecialchars($log['old_category']) ?></div>
-                                                    <div class="mb-1"><strong>Описание:</strong> <?= htmlspecialchars($log['old_description']) ?></div>
-                                                    <div><strong>Дата:</strong> <?= date('d.m.Y', strtotime($log['old_date'])) ?></div>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-gray-100 text-gray-800">
+                                                    <?= htmlspecialchars($expense['category']) ?>
+                                                </span>
+                                            </td>
+                                            <td class="px-6 py-4 text-sm text-gray-900 max-w-xs truncate">
+                                                <?= htmlspecialchars($expense['description']) ?>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-center">
+                                                <div class="flex justify-center space-x-2">
+                                                    <button 
+                                                        onclick="location.href='/edit?id=<?= $expense['id'] ?>'"
+                                                        class="text-blue-600 hover:text-blue-800 p-2 rounded-lg hover:bg-blue-50 transition-colors"
+                                                        title="Редактировать"
+                                                    >
+                                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                                                        </svg>
+                                                    </button>
+                                                    <form action="/delete" method="post" onsubmit="return confirm('Удалить этот расход?');" style="display:inline;">
+                                                        <input type="hidden" name="id" value="<?= $expense['id'] ?>">
+                                                        <button 
+                                                            type="submit"
+                                                            class="text-red-600 hover:text-red-800 p-2 rounded-lg hover:bg-red-50 transition-colors"
+                                                            title="Удалить"
+                                                        >
+                                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                                            </svg>
+                                                        </button>
+                                                    </form>
                                                 </div>
-                                            </td>
-                                            <td class="px-6 py-4">
-                                                <?php if ($log['operation'] === 'update'): ?>
-                                                    <div class="text-sm text-gray-900">
-                                                        <div class="mb-1"><strong>Сумма:</strong> <?= htmlspecialchars($log['new_amount']) ?> ₽</div>
-                                                        <div class="mb-1"><strong>Категория:</strong> <?= htmlspecialchars($log['new_category']) ?></div>
-                                                        <div class="mb-1"><strong>Описание:</strong> <?= htmlspecialchars($log['new_description']) ?></div>
-                                                        <div><strong>Дата:</strong> <?= date('d.m.Y', strtotime($log['new_date'])) ?></div>
-                                                    </div>
-                                                <?php else: ?>
-                                                    <span class="text-gray-400 italic">—</span>
-                                                <?php endif; ?>
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                                <?= date('d.m.Y H:i', strtotime($log['changed_at'])) ?>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
@@ -390,21 +326,65 @@
                     <?php else: ?>
                         <div class="px-6 py-12 text-center">
                             <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
                             </svg>
-                            <h3 class="mt-2 text-lg font-medium text-gray-900">История пуста</h3>
-                            <p class="mt-1 text-sm text-gray-500">Нет данных для отображения. Начните работу с системой, чтобы увидеть здесь историю изменений.</p>
+                            <h3 class="mt-2 text-lg font-medium text-gray-900">Расходов пока нет</h3>
+                            <p class="mt-1 text-sm text-gray-500">Начните с добавления первого расхода в вашу систему учета.</p>
                             <div class="mt-6">
                                 <a href="/add" class="inline-flex items-center px-6 py-3 border border-transparent shadow-sm text-sm font-medium rounded-lg text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition-all">
                                     <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                                     </svg>
-                                    Добавить первую запись
+                                    Добавить первый расход
                                 </a>
                             </div>
                         </div>
                     <?php endif; ?>
                 </div>
+
+                <!-- Quick Actions -->
+                <?php if (!empty($expenses)): ?>
+                    <div class="mt-8">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-4">Быстрые действия</h3>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                            <a href="/add" class="bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow text-center">
+                                <div class="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center mx-auto mb-2">
+                                    <svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                                    </svg>
+                                </div>
+                                <p class="text-sm font-medium text-gray-900">Добавить расход</p>
+                            </a>
+
+                            <a href="/incomes" class="bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow text-center">
+                                <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center mx-auto mb-2">
+                                    <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+                                    </svg>
+                                </div>
+                                <p class="text-sm font-medium text-gray-900">Доходы</p>
+                            </a>
+
+                            <a href="/accounts" class="bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow text-center">
+                                <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-2">
+                                    <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                                    </svg>
+                                </div>
+                                <p class="text-sm font-medium text-gray-900">Счета</p>
+                            </a>
+
+                            <a href="/categories" class="bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow text-center">
+                                <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center mx-auto mb-2">
+                                    <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
+                                    </svg>
+                                </div>
+                                <p class="text-sm font-medium text-gray-900">Категории</p>
+                            </a>
+                        </div>
+                    </div>
+                <?php endif; ?>
             </div>
         </main>
     </div>
@@ -469,11 +449,11 @@
             }
         });
 
-        // Table row interactions
+        // Table row click handling
         document.querySelectorAll('.table-row').forEach(row => {
             row.addEventListener('click', function(e) {
+                if (e.target.closest('button') || e.target.closest('form')) return;
                 // Could add row selection or detail view here
-                console.log('Row clicked');
             });
         });
     </script>
