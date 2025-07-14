@@ -2,18 +2,15 @@
 
 namespace App\Controllers;
 
-use Core\Database;
-use PDO;
-use PDOException;
-use Exception;
 use App\Models\Expense;
 use App\Models\Logs;
 use App\Middleware\AuthMiddleware;
+use App\Services\CsrfService;
 
 // Контроллер
 class HomeController {
     public function index() {
-        AuthMiddleware::requireLogin(); // ⛔ не пускаем без авторизации
+        AuthMiddleware::requireLogin(); // не пускаем без авторизации
         $expense = new Expense();
         $expenses = $expense->getAll(); //Получаем расходы из базы данных
         require_once __DIR__ . '/../Views/home.php';
@@ -26,14 +23,14 @@ class HomeController {
     
     public function handleAdd() {
         AuthMiddleware::requireLogin();
-        require_once __DIR__ . '/../Models/Expense.php';
-
         $amount = $_POST['amount'] ?? null;
         $category = $_POST['category'] ?? null;
         $description = $_POST['description'] ?? '';
         $date = $_POST['date'] ?? null;
-
-        if (!$amount || !$category || !$date) {
+        
+        if (!CSRFService::validateToken($_POST['_csrf_token'] ?? '')) {
+            $error = 'CSRF защита: недопустимый токен.';
+        } elseif (!$amount || !$category || !$date) {
             $error = "Пожалуйста, заполните все обязательные поля.";
             require_once __DIR__ . '/../Views/add_expense.php';
             return;
@@ -42,7 +39,11 @@ class HomeController {
         $expense = new Expense();
         $success = $expense->add($amount, $category, $description, $date);
 
-        if ($success) {
+        if (!CSRFService::validateToken($_POST['_csrf_token'] ?? '')) {
+            echo 'CSRF защита: недопустимый токен.';
+            return;
+
+        } elseif ($success) {
             header('Location: /');
             exit;
         }   else {
@@ -52,10 +53,13 @@ class HomeController {
     
     public function showEditForm() {
         AuthMiddleware::requireLogin();
-        require_once __DIR__ . '/../Models/Expense.php';
         $id = $_GET['id'] ?? null;
 
-        if (!$id) {
+        if (!CSRFService::validateToken($_POST['_csrf_token'] ?? '')) {
+            echo 'CSRF защита: недопустимый токен.';
+            return; 
+                       
+        } elseif (!$id) {
             echo "ID не указан.";
             return;
         }
@@ -73,7 +77,6 @@ class HomeController {
 
     public function handleEdit() {
         AuthMiddleware::requireLogin();
-        require_once __DIR__ . '/../Models/Expense.php';
 
         $id = $_POST['id'] ?? null;
         $amount = $_POST['amount'] ?? null;
@@ -81,7 +84,9 @@ class HomeController {
         $description = $_POST['description'] ?? '';
         $date = $_POST['date'] ?? null;
 
-        if (!$id || !$amount || !$category || !$date) {
+        if (!CSRFService::validateToken($_POST['_csrf_token'] ?? '')) {
+            $error = 'CSRF защита: недопустимый токен.';
+        } elseif (!$id || !$amount || !$category || !$date) {
             $error = "Пожалуйста, заполните все обязательные поля.";
             $expense = compact('id', 'amount', 'category', 'description', 'date');
             require_once __DIR__ . '/../Views/edit_expense.php';
@@ -96,11 +101,12 @@ class HomeController {
 }
 
     public function delete() {
-        require_once __DIR__ . '/../Models/Expense.php';
 
         $id = $_POST['id'] ?? null;
 
-        if ($id) {
+        if (!CSRFService::validateToken($_POST['_csrf_token'] ?? '')) {
+            $error = 'CSRF защита: недопустимый токен.';
+        } elseif ($id) {
             $logsModel = new Logs();
             $logsModel->delete($id);
         }

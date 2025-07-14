@@ -2,7 +2,7 @@
 
 namespace Config;
 
-class AppConfig
+class Config
 {
     private static array $settings = [
         'db' => [

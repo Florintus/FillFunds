@@ -8,9 +8,7 @@ use PDOException;
 use Exception;
 
 
-class Expense {
-    private $db;
-
+class Expense extends BaseModel {
     public function __construct() {
         $this->db = Database::getInstance()->getConnection();
     }
@@ -43,47 +41,46 @@ class Expense {
     }
 }
 
-public function showeditform($id) {
-    $stmt = $this->db->prepare('SELECT * FROM expenses WHERE id = :id');
-    $stmt->execute([':id' => $id]);
-    $expense = $stmt->fetch(PDO::FETCH_ASSOC);
+        public function showeditform($id) {
+            $stmt = $this->db->prepare('SELECT * FROM expenses WHERE id = :id');
+            $stmt->execute([':id' => $id]);
+            $expense = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if (!$expense) {
-        throw new Exception('Расход не найден');
-    }
+            if (!$expense) {
+                throw new Exception('Расход не найден');
+            }
 
     return $expense;
-}
-public function handleEdit($id) {
-    $amount = $_POST['amount'] ?? null;
-    $category = $_POST['category'] ?? null;
-    $description = $_POST['description'] ?? '';
-    $date = $_POST['date'] ?? null;
-
-    if (!$amount || !$category || !$date) {
-        throw new Exception("Пожалуйста, заполните все обязательные поля.");
     }
+        public function handleEdit($id) {
+            $amount = $_POST['amount'] ?? null;
+            $category = $_POST['category'] ?? null;
+            $description = $_POST['description'] ?? '';
+            $date = $_POST['date'] ?? null;
 
-    $stmt = $this->db->prepare('UPDATE expenses SET amount = :amount, category = :category, 
-                                description = :description, date = :date WHERE id = :id');
-    $success = $stmt->execute([
-        ':amount' => $amount,
-        ':category' => $category,
-        ':description' => $description,
-        ':date' => $date,
-        ':id' => $id,
-    ]);
+            if (!$amount || !$category || !$date) {
+                throw new Exception("Пожалуйста, заполните все обязательные поля.");
+            }
 
-    if (!$success) {
-        throw new Exception('Ошибка при обновлении расхода.');
-    }
+            $stmt = $this->db->prepare('UPDATE expenses SET amount = :amount, category = :category, 
+                                        description = :description, date = :date WHERE id = :id');
+            $success = $stmt->execute([
+                ':amount' => $amount,
+                ':category' => $category,
+                ':description' => $description,
+                ':date' => $date,
+                ':id' => $id,
+            ]);
 
-    return true;
-}
+            if (!$success) {
+                throw new Exception('Ошибка при обновлении расхода.');
+            }
 
+            return true;
+        }
 
-public function getLogs() {
-    $stmt = $this->db->query('SELECT * FROM expenses_log ORDER BY changed_at DESC');
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
+        public function getLogs() {
+            $stmt = $this->db->query('SELECT * FROM expenses_log ORDER BY changed_at DESC');
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
 }

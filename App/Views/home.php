@@ -222,6 +222,7 @@
                             <form action="/delete" method="post" onsubmit="return confirm('Удалить этот расход?');" style="display:inline;">
                                 <input type="hidden" name="id" value="<?= $expense['id'] ?>">
                                 <input type="submit" value="Удалить">
+                                <input type="hidden" name="_csrf_token" value="<?= htmlspecialchars(\App\Services\CSRFService::generateToken()) ?>">
                             </form>
                         </td>
                     </tr>

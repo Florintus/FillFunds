@@ -42,7 +42,7 @@ class Router
             $controllerFile = __DIR__ . '/../' . str_replace('\\', '/', $fullControllerClass) . '.php';
 
             if (!file_exists($controllerFile)) {
-                die("❌ Файл контроллера не найден: $controllerFile");
+                die(" Файл контроллера не найден: $controllerFile");
             }
 
             require_once $controllerFile;
@@ -55,10 +55,10 @@ class Router
             if (method_exists($controllerInstance, $methodName)) {
                 call_user_func([$controllerInstance, $methodName]);
             } else {
-                die("❌ Метод '$methodName' не найден в контроллере '$fullControllerClass'.");
+                die(" Метод '$methodName' не найден в контроллере '$fullControllerClass'.");
             }
         } else {
-            die("❌ Класс контроллера '$fullControllerClass' не найден.");
+            die(" Класс контроллера '$fullControllerClass' не найден.");
         }
     }
 

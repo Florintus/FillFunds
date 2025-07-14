@@ -3,9 +3,6 @@
 <head>
     <meta charset="UTF-8" />
     <title>Вход</title>
-    <style>
-        /* сюда стили как в предыдущих примерах */
-    </style>
 </head>
 <body>
     <h1>Вход</h1>
@@ -22,6 +19,8 @@
         <input type="password" name="password" id="password" required />
 
         <button type="submit">Войти</button>
+
+        <input type="hidden" name="_csrf_token" value="<?= htmlspecialchars(\App\Services\CSRFService::generateToken()) ?>">
     </form>
 
     <p>Нет аккаунта? <a href="/register">Зарегистрироваться</a></p>

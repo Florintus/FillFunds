@@ -3,18 +3,15 @@
 <head>
     <meta charset="UTF-8" />
     <title>Регистрация</title>
-    <style>
-        /* сюда стили как в предыдущих примерах */
-    </style>
 </head>
 <body>
     <h1>Регистрация</h1>
     <?php if (!empty($error)): ?>
         <p style="color:red;"><?= htmlspecialchars($error) ?></p>
     <?php elseif (!empty($success)): ?>
-        <p style="color:green;"><?= $success ?></p>
+        <p style="color:green;"><?= htmlspecialchars($success) ?></p>
     <?php endif; ?>
-    <?php if (empty($success)): ?>
+    <?php if (empty($success)): ?>    
     <form action="/register" method="post" autocomplete="off">
         <label for="username">Логин:</label>
         <input type="text" name="username" id="username" required autofocus />
@@ -27,6 +24,7 @@
 
         <label for="password_confirm">Подтверждение пароля:</label>
         <input type="password" name="password_confirm" id="password_confirm" required />
+        <input type="hidden" name="_csrf_token" value="<?= htmlspecialchars(\App\Services\CSRFService::generateToken()) ?>">
 
         <button type="submit">Зарегистрироваться</button>
     </form>

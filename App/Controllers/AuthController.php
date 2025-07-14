@@ -2,92 +2,103 @@
 
 namespace App\Controllers;
 
-use PDO;
 use App\Models\User;
 use App\Middleware\AuthMiddleware;
-use Config\AppConfig;
+use App\Services\CSRFService;
+use Error;
 
 class AuthController
 {
-    private PDO $pdo;
     private User $userModel;
 
     public function __construct()
     {
-        //$dbHost = AppConfig::get('db.host', 'default_host');
-        //$debug = AppConfig::get('app.debug', false);
-        $dsn = 'pgsql:host=127.127.126.13;port=5432;dbname=FinancyBD';
-        $dbUser = 'florintus';
-        $dbPass = '12345';
-
-        $this->pdo = new PDO($dsn, $dbUser, $dbPass, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
-        $this->userModel = new User($this->pdo);
+        $this->userModel = new User();
     }
 
-    public function login()
+    // --- Вход ---
+    public function showLoginForm()
     {
         AuthMiddleware::requireGuest();
         $error = '';
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $username = trim($_POST['username'] ?? '');
-            $password = $_POST['password'] ?? '';
-
-            if ($username === '' || $password === '') {
-                $error = 'Пожалуйста, заполните все поля.';
-            } else {
-                $user = $this->userModel->findByUsername($username);
-                if ($user && password_verify($password, $user['password_hash'])) {
-                    $_SESSION['user_id'] = $user['id'];
-                    $_SESSION['username'] = $user['username'];
-                    header('Location: /');
-                    exit;
-                } else {
-                    $error = 'Неверный логин или пароль.';
-                }
-            }
-        }
-
-        // Подключаем view, передаём $error
         require __DIR__ . '/../views/login.php';
     }
 
-    public function register()
+    public function processLogin()
+    {
+        AuthMiddleware::requireGuest();
+        $error = '';
+
+        $username = trim($_POST['username'] ?? '');
+        $password = $_POST['password'] ?? '';
+
+        if (!CSRFService::validateToken($_POST['_csrf_token'] ?? '')) {
+            $error = 'CSRF защита: недопустимый токен.';
+        } elseif ($username === '' || $password === '') {
+            $error = 'Пожалуйста, заполните все поля.';
+        } else {
+            $user = $this->userModel->findByUsername($username);
+            if ($user && password_verify($password, $user['password_hash'])) {
+                session_regenerate_id(true);
+                $_SESSION['user_id'] = $user['id'];
+                $_SESSION['username'] = $user['username'];
+                header('Location: /');
+                exit;
+            } else {
+                $error = 'Неверный логин или пароль.';
+            }
+        }
+
+        require __DIR__ . '/../views/login.php';
+    }
+
+    // --- Регистрация ---
+    public function showRegisterForm()
+    {
+        AuthMiddleware::requireGuest();
+        $error = '';
+        $success = '';
+        require __DIR__ . '/../views/register.php';
+    }
+
+    public function processRegister()
     {
         AuthMiddleware::requireGuest();
         $error = '';
         $success = '';
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $username = trim($_POST['username'] ?? '');
-            $email = trim($_POST['email'] ?? '');
-            $password = $_POST['password'] ?? '';
-            $password_confirm = $_POST['password_confirm'] ?? '';
+        $username = trim($_POST['username'] ?? '');
+        $email = trim($_POST['email'] ?? '');
+        $password = $_POST['password'] ?? '';
+        $password_confirm = $_POST['password_confirm'] ?? '';
 
-            if ($username === '' || $email === '' || $password === '' || $password_confirm === '') {
-                $error = 'Пожалуйста, заполните все поля.';
-            } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                $error = 'Введите корректный email.';
-            } elseif ($password !== $password_confirm) {
-                $error = 'Пароли не совпадают.';
-            } elseif ($this->userModel->findByUsername($username) !== null) {
-                $error = 'Пользователь с таким логином уже существует.';
-            } elseif ($this->userModel->findByEmail($email) !== null) {
-                $error = 'Пользователь с таким email уже существует.';
+        if (!CSRFService::validateToken($_POST['_csrf_token'] ?? '')) {
+            $error = 'CSRF защита: недопустимый токен.';
+        } elseif ($username === '' || $email === '' || $password === '' || $password_confirm === '') {
+            $error = 'Пожалуйста, заполните все поля.';
+        } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $error = 'Введите корректный email.';
+        } elseif ($password !== $password_confirm) {
+            $error = 'Пароли не совпадают.';
+        } elseif ($this->userModel->findByUsername($username) !== null) {
+            $error = 'Пользователь с таким логином уже существует.';
+        } elseif ($this->userModel->findByEmail($email) !== null) {
+            $error = 'Пользователь с таким email уже существует.';
+        } else {
+            $password_hash = password_hash($password, PASSWORD_DEFAULT);
+            $created = $this->userModel->create($username, $email, $password_hash);
+
+            if ($created) {
+                $success = 'Регистрация прошла успешно! Теперь вы можете <a href="/login">войти</a>.';
             } else {
-                $password_hash = password_hash($password, PASSWORD_DEFAULT);
-                $created = $this->userModel->create($username, $email, $password_hash);
-
-                if ($created) {
-                    $success = 'Регистрация прошла успешно! Теперь вы можете <a href="/login">войти</a>.';
-                } else {
-                    $error = 'Ошибка при регистрации. Попробуйте позже.';
-                }
+                $error = 'Ошибка при регистрации. Попробуйте позже.';
             }
         }
 
         require __DIR__ . '/../views/register.php';
     }
 
+    // --- Выход ---
     public function logout()
     {
         $_SESSION = [];

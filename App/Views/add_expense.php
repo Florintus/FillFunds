@@ -167,7 +167,7 @@
         <label>Дата:
             <input type="date" name="date" required>
         </label>
-
+        <input type="hidden" name="_csrf_token" value="<?= htmlspecialchars(\App\Services\CSRFService::generateToken()) ?>">
         <button type="submit">Добавить</button>
     </form>
 

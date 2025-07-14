@@ -16,10 +16,10 @@ $router->get('/edit', ['HomeController', 'showEditForm']);
 $router->post('/edit', ['HomeController', 'handleEdit']);
 $router->post('/delete', ['HomeController', 'delete']);
 $router->get('/logs', ['HomeController', 'showLogs']);
-$router->get('/login', ['AuthController', 'login']);
-$router->post('/login', ['AuthController', 'login']);
-$router->get('/register', ['AuthController', 'register']);
-$router->post('/register', ['AuthController', 'register']);
+$router->get('/login', ['AuthController', 'showLoginForm']);
+$router->post('/login', ['AuthController', 'processLogin']);
+$router->get('/register', ['AuthController', 'showRegisterForm']);
+$router->post('/register', ['AuthController', 'processRegister']);
 $router->get('/logout', ['AuthController', 'logout']);
 //Обработка запросов
 $uri = $_SERVER['REQUEST_URI'];

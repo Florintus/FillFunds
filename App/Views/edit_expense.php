@@ -31,6 +31,7 @@
         </label><br><br>
 
         <button type="submit">Сохранить</button>
+        <input type="hidden" name="_csrf_token" value="<?= htmlspecialchars(\App\Services\CSRFService::generateToken()) ?>">
     </form>
 
     <p><a href="/">← Вернуться на главную</a></p>
