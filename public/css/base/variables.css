@@ -1,0 +1,182 @@
+/* ==========================================================================
+   FillFunds - CSS Variables & Brand Colors
+   ========================================================================== */
+
+:root {
+    /* Brand Colors */
+    --ff-primary-50: #eff6ff;
+    --ff-primary-100: #dbeafe;
+    --ff-primary-200: #bfdbfe;
+    --ff-primary-300: #93c5fd;
+    --ff-primary-400: #60a5fa;
+    --ff-primary-500: #3b82f6;
+    --ff-primary-600: #2563eb;
+    --ff-primary-700: #1d4ed8;
+    --ff-primary-800: #1e40af;
+    --ff-primary-900: #1e3a8a;
+
+    /* Gray Scale */
+    --ff-gray-50: #f9fafb;
+    --ff-gray-100: #f3f4f6;
+    --ff-gray-200: #e5e7eb;
+    --ff-gray-300: #d1d5db;
+    --ff-gray-400: #9ca3af;
+    --ff-gray-500: #6b7280;
+    --ff-gray-600: #4b5563;
+    --ff-gray-700: #374151;
+    --ff-gray-800: #1f2937;
+    --ff-gray-900: #111827;
+
+    /* Semantic Colors */
+    --ff-success-50: #f0fdf4;
+    --ff-success-500: #10b981;
+    --ff-success-600: #059669;
+
+    --ff-danger-50: #fef2f2;
+    --ff-danger-500: #ef4444;
+    --ff-danger-600: #dc2626;
+
+    --ff-warning-50: #fefce8;
+    --ff-warning-500: #f59e0b;
+    --ff-warning-600: #d97706;
+
+    --ff-info-50: #f0fdfa;
+    --ff-info-500: #14b8a6;
+    --ff-info-600: #0d9488;
+
+    /* Gradients */
+    --ff-gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --ff-gradient-success: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    --ff-gradient-danger: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    --ff-gradient-warning: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    --ff-gradient-info: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%);
+    --ff-gradient-purple: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+
+    /* Typography */
+    --ff-font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+    --ff-font-mono: 'Fira Code', 'Monaco', 'Cascadia Code', 'Roboto Mono', monospace;
+
+    --ff-font-size-xs: 0.75rem;
+    --ff-font-size-sm: 0.875rem;
+    --ff-font-size-base: 1rem;
+    --ff-font-size-lg: 1.125rem;
+    --ff-font-size-xl: 1.25rem;
+    --ff-font-size-2xl: 1.5rem;
+    --ff-font-size-3xl: 1.875rem;
+    --ff-font-size-4xl: 2.25rem;
+    --ff-font-size-5xl: 3rem;
+    --ff-font-size-6xl: 3.75rem;
+
+    --ff-line-height-xs: 1rem;
+    --ff-line-height-sm: 1.25rem;
+    --ff-line-height-base: 1.5rem;
+    --ff-line-height-lg: 1.75rem;
+    --ff-line-height-xl: 1.75rem;
+    --ff-line-height-2xl: 2rem;
+    --ff-line-height-3xl: 2.25rem;
+    --ff-line-height-4xl: 2.5rem;
+    --ff-line-height-5xl: 1;
+    --ff-line-height-6xl: 1;
+
+    /* Spacing Scale */
+    --ff-space-px: 1px;
+    --ff-space-0: 0;
+    --ff-space-0-5: 0.125rem;
+    --ff-space-1: 0.25rem;
+    --ff-space-1-5: 0.375rem;
+    --ff-space-2: 0.5rem;
+    --ff-space-2-5: 0.625rem;
+    --ff-space-3: 0.75rem;
+    --ff-space-3-5: 0.875rem;
+    --ff-space-4: 1rem;
+    --ff-space-5: 1.25rem;
+    --ff-space-6: 1.5rem;
+    --ff-space-7: 1.75rem;
+    --ff-space-8: 2rem;
+    --ff-space-9: 2.25rem;
+    --ff-space-10: 2.5rem;
+    --ff-space-12: 3rem;
+    --ff-space-16: 4rem;
+    --ff-space-20: 5rem;
+    --ff-space-24: 6rem;
+    --ff-space-32: 8rem;
+    --ff-space-40: 10rem;
+    --ff-space-48: 12rem;
+    --ff-space-56: 14rem;
+    --ff-space-64: 16rem;
+
+    /* Border Radius */
+    --ff-border-radius-none: 0;
+    --ff-border-radius-sm: 0.125rem;
+    --ff-border-radius: 0.25rem;
+    --ff-border-radius-md: 0.375rem;
+    --ff-border-radius-lg: 0.5rem;
+    --ff-border-radius-xl: 0.75rem;
+    --ff-border-radius-2xl: 1rem;
+    --ff-border-radius-3xl: 1.5rem;
+    --ff-border-radius-full: 9999px;
+
+    /* Shadows */
+    --ff-shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --ff-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --ff-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    --ff-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --ff-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --ff-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    --ff-shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    --ff-shadow-primary: 0 10px 25px rgba(59, 130, 246, 0.15);
+
+    /* Layout */
+    --ff-container-max-width: 1280px;
+    --ff-container-padding: var(--ff-space-4);
+    --ff-container-padding-sm: var(--ff-space-6);
+    --ff-container-padding-lg: var(--ff-space-8);
+
+    --ff-grid-gap: var(--ff-space-8);
+    --ff-grid-gap-sm: var(--ff-space-4);
+    --ff-grid-gap-lg: var(--ff-space-12);
+
+    --ff-section-padding: var(--ff-space-20) 0;
+    --ff-section-padding-sm: var(--ff-space-12) 0;
+
+    /* Animation & Transition */
+    --ff-transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    --ff-transition-base: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+    --ff-transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+
+    --ff-ease-in: cubic-bezier(0.4, 0, 1, 1);
+    --ff-ease-out: cubic-bezier(0, 0, 0.2, 1);
+    --ff-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* Z-Index Scale */
+    --ff-z-0: 0;
+    --ff-z-10: 10;
+    --ff-z-20: 20;
+    --ff-z-30: 30;
+    --ff-z-40: 40;
+    --ff-z-50: 50;
+    --ff-z-auto: auto;
+
+    /* Breakpoints (for reference in media queries) */
+    --ff-breakpoint-sm: 640px;
+    --ff-breakpoint-md: 768px;
+    --ff-breakpoint-lg: 1024px;
+    --ff-breakpoint-xl: 1280px;
+    --ff-breakpoint-2xl: 1536px;
+}
+
+/* Light Theme Variables (default) */
+:root {
+    --ff-bg-primary: var(--ff-gray-50);
+    --ff-bg-secondary: #ffffff;
+    --ff-bg-tertiary: var(--ff-gray-100);
+
+    --ff-text-primary: var(--ff-gray-900);
+    --ff-text-secondary: var(--ff-gray-600);
+    --ff-text-tertiary: var(--ff-gray-400);
+
+    --ff-border-primary: var(--ff-gray-200);
+    --ff-border-secondary: var(--ff-gray-300);
+
+    --ff-shadow-color: rgba(0, 0, 0, 0.1);
+}

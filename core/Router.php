@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Controllers;
+namespace Core;
 // Ядро роутера — Router
 
 class Router
 {
     private array $routes = [];
+    private array $protectedRoutes = [];
 
     // Регистрируем GET маршрут
     public function get(string $uri, array $handler): void
@@ -17,6 +18,19 @@ class Router
     public function post(string $uri, array $handler): void
     {
         $this->routes['POST'][$this->normalizeUri($uri)] = $handler;
+    }
+        public function protectedGet(string $uri, array $handler): void
+    {
+        $normalizedUri = $this->normalizeUri($uri);
+        $this->routes['GET'][$normalizedUri] = $handler;
+        $this->protectedRoutes[$normalizedUri] = true;
+    }
+
+    public function protectedPost(string $uri, array $handler): void
+    {
+        $normalizedUri = $this->normalizeUri($uri);
+        $this->routes['POST'][$normalizedUri] = $handler;
+        $this->protectedRoutes[$normalizedUri] = true;
     }
 
     // Обработка запроса
@@ -32,6 +46,13 @@ class Router
             return;
         }
 
+            if (isset($this->protectedRoutes[$uri]) && $this->protectedRoutes[$uri]) {
+        if (!isset($_SESSION['user_id'])) {
+            header('Location: /login');
+            exit;
+        }
+    }
+    
         [$controllerName, $methodName] = $this->routes[$method][$uri];
 
         // Полное имя класса контроллера с пространством имён

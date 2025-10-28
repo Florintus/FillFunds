@@ -1,0 +1,436 @@
+/* ==========================================================================
+   FillFunds - Dark Theme
+   ========================================================================== */
+
+/* Dark Theme Root Variables */
+.dark {
+    color-scheme: dark;
+
+    /* Dark Theme Colors */
+    --ff-bg-primary: #0f172a;
+    --ff-bg-secondary: #1e293b;
+    --ff-bg-tertiary: #334155;
+
+    --ff-text-primary: #f1f5f9;
+    --ff-text-secondary: #94a3b8;
+    --ff-text-tertiary: #64748b;
+
+    --ff-border-primary: #334155;
+    --ff-border-secondary: #475569;
+
+    --ff-shadow-color: rgba(0, 0, 0, 0.3);
+
+    /* Dark Theme Shadows */
+    --ff-shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+    --ff-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+    --ff-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+    --ff-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+    --ff-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.15);
+    --ff-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+    --ff-shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+/* Body & Base Elements */
+.dark body {
+    background-color: var(--ff-bg-primary);
+    color: var(--ff-text-primary);
+}
+
+/* Header */
+.dark .ff-header {
+    background-color: var(--ff-bg-secondary);
+    border-bottom: 1px solid var(--ff-border-primary);
+}
+
+.dark .ff-logo-text {
+    color: var(--ff-text-primary);
+}
+
+.dark .ff-nav-link {
+    color: var(--ff-text-secondary);
+}
+
+.dark .ff-nav-link:hover,
+.dark .ff-nav-link.active {
+    color: var(--ff-primary-400);
+}
+
+.dark .ff-header-btn-login {
+    color: var(--ff-primary-400);
+}
+
+.dark .ff-header-btn-login:hover {
+    background-color: rgba(59, 130, 246, 0.1);
+}
+
+.dark .ff-mobile-menu {
+    background-color: var(--ff-bg-secondary);
+    border-color: var(--ff-border-primary);
+}
+
+.dark .ff-theme-menu {
+    background-color: var(--ff-bg-secondary);
+    border-color: var(--ff-border-primary);
+}
+
+.dark .ff-theme-option:hover,
+.dark .ff-mobile-nav-link:hover {
+    background-color: var(--ff-bg-tertiary);
+}
+
+/* Cards */
+.dark .ff-card,
+.dark .ff-feature-card,
+.dark .ff-stats-card,
+.dark .ff-testimonial-card,
+.dark .ff-pricing-card,
+.dark .ff-blog-card,
+.dark .ff-team-card {
+    background-color: var(--ff-bg-secondary);
+    border-color: var(--ff-border-primary);
+}
+
+.dark .ff-feature-card-blue {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(59, 130, 246, 0.05) 100%);
+}
+
+.dark .ff-feature-card-green {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(16, 185, 129, 0.05) 100%);
+}
+
+.dark .ff-feature-card-red {
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(239, 68, 68, 0.05) 100%);
+}
+
+.dark .ff-feature-card-purple {
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(139, 92, 246, 0.05) 100%);
+}
+
+.dark .ff-feature-card-yellow {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(245, 158, 11, 0.05) 100%);
+}
+
+.dark .ff-feature-card-teal {
+    background: linear-gradient(135deg, rgba(20, 184, 166, 0.1) 0%, rgba(20, 184, 166, 0.05) 100%);
+}
+
+.dark .ff-feature-title,
+.dark .ff-stats-number,
+.dark .ff-testimonial-name,
+.dark .ff-pricing-plan,
+.dark .ff-pricing-price,
+.dark .ff-blog-title,
+.dark .ff-team-name {
+    color: var(--ff-text-primary);
+}
+
+.dark .ff-feature-description,
+.dark .ff-stats-label,
+.dark .ff-testimonial-role,
+.dark .ff-pricing-period,
+.dark .ff-pricing-feature,
+.dark .ff-blog-excerpt,
+.dark .ff-team-role {
+    color: var(--ff-text-secondary);
+}
+
+.dark .ff-blog-meta,
+.dark .ff-blog-author-name {
+    color: var(--ff-text-secondary);
+}
+
+.dark .ff-testimonial-quote {
+    color: var(--ff-text-primary);
+}
+
+.dark .ff-testimonial-quote::before {
+    color: var(--ff-primary-600);
+}
+
+/* Forms */
+.dark .ff-form-container {
+    background-color: var(--ff-bg-secondary);
+    border-color: var(--ff-border-primary);
+}
+
+.dark .ff-form-title {
+    color: var(--ff-text-primary);
+}
+
+.dark .ff-form-description,
+.dark .ff-form-help {
+    color: var(--ff-text-secondary);
+}
+
+.dark .ff-label {
+    color: var(--ff-text-primary);
+}
+
+.dark .ff-input,
+.dark .ff-textarea,
+.dark .ff-select {
+    background-color: var(--ff-bg-tertiary);
+    border-color: var(--ff-border-secondary);
+    color: var(--ff-text-primary);
+}
+
+.dark .ff-input::placeholder,
+.dark .ff-textarea::placeholder {
+    color: var(--ff-text-tertiary);
+}
+
+.dark .ff-input:focus,
+.dark .ff-textarea:focus,
+.dark .ff-select:focus {
+    border-color: var(--ff-primary-400);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+.dark .ff-input:disabled,
+.dark .ff-textarea:disabled {
+    background-color: var(--ff-bg-primary);
+    color: var(--ff-text-tertiary);
+}
+
+.dark .ff-input-addon {
+    background-color: var(--ff-bg-primary);
+    border-color: var(--ff-border-secondary);
+    color: var(--ff-text-secondary);
+}
+
+.dark .ff-input-icon {
+    color: var(--ff-text-tertiary);
+}
+
+.dark .ff-checkbox,
+.dark .ff-radio {
+    background-color: var(--ff-bg-tertiary);
+    border-color: var(--ff-border-secondary);
+}
+
+.dark .ff-checkbox-label,
+.dark .ff-radio-label {
+    color: var(--ff-text-primary);
+}
+
+.dark .ff-switch-slider {
+    background-color: var(--ff-border-secondary);
+}
+
+.dark .ff-file-input-label {
+    background-color: var(--ff-bg-tertiary);
+    border-color: var(--ff-border-secondary);
+    color: var(--ff-text-primary);
+}
+
+.dark .ff-file-input-label:hover {
+    background-color: var(--ff-bg-primary);
+}
+
+.dark .ff-floating-label .ff-input:focus~.ff-label,
+.dark .ff-floating-label .ff-input:not(:placeholder-shown)~.ff-label {
+    color: var(--ff-primary-400);
+}
+
+/* Buttons */
+.dark .ff-btn-secondary {
+    background-color: var(--ff-bg-tertiary);
+    border-color: var(--ff-border-secondary);
+    color: var(--ff-text-primary);
+}
+
+.dark .ff-btn-secondary:hover {
+    background-color: var(--ff-bg-primary);
+    border-color: var(--ff-border-primary);
+}
+
+.dark .ff-btn-ghost-secondary {
+    color: var(--ff-text-secondary);
+}
+
+.dark .ff-btn-ghost-secondary:hover {
+    background-color: var(--ff-bg-tertiary);
+    color: var(--ff-text-primary);
+}
+
+.dark .ff-btn-outline-secondary {
+    border-color: var(--ff-border-secondary);
+    color: var(--ff-text-secondary);
+}
+
+.dark .ff-btn-outline-secondary:hover {
+    background-color: var(--ff-border-secondary);
+    color: var(--ff-text-primary);
+}
+
+/* Footer */
+.dark .ff-footer {
+    background-color: #020617;
+    color: var(--ff-text-secondary);
+}
+
+.dark .ff-footer-logo-text,
+.dark .ff-footer-section-title,
+.dark .ff-footer-newsletter-title {
+    color: var(--ff-text-primary);
+}
+
+.dark .ff-footer-description,
+.dark .ff-footer-link,
+.dark .ff-footer-copyright,
+.dark .ff-footer-legal-link,
+.dark .ff-footer-newsletter-description {
+    color: var(--ff-text-tertiary);
+}
+
+.dark .ff-footer-link:hover,
+.dark .ff-footer-legal-link:hover {
+    color: var(--ff-text-primary);
+}
+
+.dark .ff-social-link {
+    background-color: var(--ff-bg-secondary);
+    color: var(--ff-text-secondary);
+}
+
+.dark .ff-footer-newsletter-input {
+    background-color: var(--ff-bg-secondary);
+    border-color: var(--ff-border-primary);
+    color: var(--ff-text-primary);
+}
+
+.dark .ff-footer-newsletter-input::placeholder {
+    color: var(--ff-text-tertiary);
+}
+
+.dark .ff-footer-newsletter-input:focus {
+    border-color: var(--ff-primary-400);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+/* Team Social Links */
+.dark .ff-team-social-link {
+    background-color: var(--ff-bg-tertiary);
+    color: var(--ff-text-secondary);
+}
+
+.dark .ff-team-social-link:hover {
+    background-color: var(--ff-primary-600);
+    color: #ffffff;
+}
+
+/* Stats Icons in Dark Mode */
+.dark .ff-stats-icon.green {
+    background-color: rgba(16, 185, 129, 0.2);
+    color: #10b981;
+}
+
+.dark .ff-stats-icon.blue {
+    background-color: rgba(59, 130, 246, 0.2);
+    color: #3b82f6;
+}
+
+.dark .ff-stats-icon.red {
+    background-color: rgba(239, 68, 68, 0.2);
+    color: #ef4444;
+}
+
+.dark .ff-stats-icon.purple {
+    background-color: rgba(139, 92, 246, 0.2);
+    color: #8b5cf6;
+}
+
+/* Scrollbar in Dark Mode */
+.dark ::-webkit-scrollbar-track {
+    background: var(--ff-bg-primary);
+}
+
+.dark ::-webkit-scrollbar-thumb {
+    background: var(--ff-border-secondary);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+    background: var(--ff-text-tertiary);
+}
+
+/* Selection in Dark Mode */
+.dark ::selection {
+    background-color: rgba(59, 130, 246, 0.3);
+    color: var(--ff-text-primary);
+}
+
+.dark ::-moz-selection {
+    background-color: rgba(59, 130, 246, 0.3);
+    color: var(--ff-text-primary);
+}
+
+/* Code Elements */
+.dark code {
+    background-color: var(--ff-bg-tertiary);
+    color: var(--ff-text-primary);
+}
+
+.dark pre {
+    background-color: #000000;
+    color: var(--ff-text-secondary);
+}
+
+/* Links */
+.dark a {
+    color: var(--ff-primary-400);
+}
+
+.dark a:hover {
+    color: var(--ff-primary-300);
+}
+
+/* Borders */
+.dark .ff-form-actions,
+.dark .ff-blog-author,
+.dark .ff-footer-bottom {
+    border-color: var(--ff-border-primary);
+}
+
+/* Media Queries for Dark Theme */
+@media (prefers-color-scheme: dark) {
+
+    /* Automatically apply dark theme if user prefers dark mode */
+    :root:not(.light) {
+        color-scheme: dark;
+
+        --ff-bg-primary: #0f172a;
+        --ff-bg-secondary: #1e293b;
+        --ff-bg-tertiary: #334155;
+
+        --ff-text-primary: #f1f5f9;
+        --ff-text-secondary: #94a3b8;
+        --ff-text-tertiary: #64748b;
+
+        --ff-border-primary: #334155;
+        --ff-border-secondary: #475569;
+
+        --ff-shadow-color: rgba(0, 0, 0, 0.3);
+    }
+}
+
+/* Toggle transitions for theme switching */
+* {
+    transition: bg-primary var(--ff-transition-fast),
+        border-color var(--ff-transition-fast),
+        color var(--ff-transition-fast);
+}
+
+/* Disable transitions during theme change to prevent flash */
+.theme-transitioning * {
+    transition: none !important;
+}
+
+/* High contrast support for dark theme */
+@media (prefers-contrast: high) {
+    .dark {
+        --ff-bg-primary: #000000;
+        --ff-bg-secondary: #1a1a1a;
+        --ff-text-primary: #ffffff;
+        --ff-border-primary: #666666;
+    }
+}
