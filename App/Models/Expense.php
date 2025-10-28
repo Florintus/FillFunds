@@ -114,4 +114,48 @@ class Expense {
         $stmt = $this->db->prepare("DELETE FROM expenses WHERE id = :id");
         $stmt->execute([':id' => $id]);
     }
+     public function getTotalAmount(): float
+    {
+        $stmt = $this->db->query("SELECT SUM(amount) FROM expenses");
+        return $stmt->fetchColumn() ?: 0.0;
+    }
+
+    /**
+     * Готовит данные по расходам для графика.
+     * Возвращает массив сумм по месяцам за выбранный период.
+     */
+    public function getDataForChart(string $period): array
+    {
+        $interval = match ($period) {
+            'quarter' => '3 MONTH',
+            'year' => '12 MONTH',
+            default => '1 MONTH',
+        };
+        
+        // Этот запрос строит серию месяцев за нужный период (даже если по ним нет данных)
+        // и присоединяет к ней реальные данные о расходах.
+        // Это гарантирует, что на графике будут все месяцы, а для пустых будет 0.
+        $sql = "
+            WITH months AS (
+                SELECT TO_CHAR(m, 'YYYY-MM') as month_key
+                FROM generate_series(
+                    DATE_TRUNC('month', NOW() - INTERVAL '$interval' + INTERVAL '1 month'),
+                    DATE_TRUNC('month', NOW()),
+                    '1 month'::interval
+                ) as m
+            )
+            SELECT
+                COALESCE(SUM(e.amount), 0) as total
+            FROM months m
+            LEFT JOIN expenses e ON TO_CHAR(e.date, 'YYYY-MM') = m.month_key
+            GROUP BY m.month_key
+            ORDER BY m.month_key ASC;
+        ";
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+        
+        // Возвращаем только массив значений
+        return $stmt->fetchAll(PDO::FETCH_COLUMN);
+    }
 }

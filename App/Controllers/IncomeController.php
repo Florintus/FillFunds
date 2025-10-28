@@ -3,29 +3,30 @@ namespace App\Controllers;
 
 use App\Models\Income;
 use App\Models\Account;
+use Core\BaseController;
 
-class IncomeController
+$pageCSS = ['/css/pages/home.css'];
+
+class IncomeController extends BaseController
 {
     public function index(): void
     {
         $income = new Income();
         $incomes = $income->getAll();
 
-        require_once __DIR__ . '/../Views/income/index.php';
+        $this->render('income/index', [
+            'incomes' => $incomes,
+        ]);
     }
 
     public function createForm(): void
     {
         $accountModel = new Account();
-        $accounts = $accountModel->getAll(); // Получаем все счета
+        $accounts = $accountModel->getAll();
 
-        require __DIR__ . '/../Views/income/create.php'; // Передаем $accounts в представление
-    }
-
-    public function create()
-    {
-        $accounts = new Account ();
-        require_once __DIR__ . '/../Views/incomes/create.php';
+        $this->render('income/create', [
+            'accounts' => $accounts
+        ]);
     }
 
     public function store(): void
@@ -39,8 +40,14 @@ class IncomeController
         $date = trim($_POST['date'] ?? '');
 
         if ($account === '' || $category === '' || $amount <= 0 || $date === '') {
-            $error = 'Поля "Счет", "Категория", "Сумма" и "Дата" обязательны';
-            require_once __DIR__ . '/../Views/income/create.php';
+            $accountModel = new Account();
+            $accounts = $accountModel->getAll();
+            
+            $this->render('income/create', [
+                'accounts' => $accounts,
+                'error' => 'Поля "Счет", "Категория", "Сумма" и "Дата" обязательны',
+                'old_data' => $_POST // Сохраняем введенные данные
+            ]);
             return;
         }
 
@@ -55,18 +62,16 @@ class IncomeController
             'date' => $date,
         ]);
 
-        header('Location: /incomes');
-        exit;
+        $this->redirect('/incomes');
     }
 
-    public function delete() 
+    public function delete(): void
     {
         $id = $_GET['id'] ?? null;
         if ($id) {
             $income = new Income();
             $income->delete($id);
         }
-        header('Location: /incomes');
-        exit;
+        $this->redirect('/incomes');
     }
- }
+}

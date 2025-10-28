@@ -1,0 +1,50 @@
+.feature-card {
+    background: var(--bg-card);
+    border-radius: var(--border-radius-lg);
+    padding: 2rem;
+    text-align: center;
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border-color);
+    transition: var(--transition);
+}
+
+.feature-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+}
+
+.feature-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    font-size: 1.5rem;
+    color: white;
+}
+
+.icon-1 {
+    background: var(--gradient-primary);
+}
+
+.icon-2 {
+    background: var(--gradient-accent);
+}
+
+.icon-3 {
+    background: var(--gradient-success);
+}
+
+.icon-4 {
+    background: var(--gradient-warning);
+}
+
+.icon-5 {
+    background: var(--gradient-danger);
+}
+
+.icon-6 {
+    background: #8b5cf6;
+}

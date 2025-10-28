@@ -46,5 +46,44 @@ class Income
         $stmt = $this->db->prepare("DELETE FROM incomes WHERE id = :id");
         $stmt->execute([':id' => $id]);
     }
+        public function getTotalAmount(): float
+    {
+        $stmt = $this->db->query("SELECT SUM(amount) FROM incomes");
+        return $stmt->fetchColumn() ?: 0.0;
+    }
 
+    /**
+     * Готовит данные по доходам для графика.
+     * Возвращает массив сумм по месяцам за выбранный период.
+     */
+    public function getDataForChart(string $period): array
+    {
+        $interval = match ($period) {
+            'quarter' => '3 MONTH',
+            'year' => '12 MONTH',
+            default => '1 MONTH',
+        };
+
+        $sql = "
+            WITH months AS (
+                SELECT TO_CHAR(m, 'YYYY-MM') as month_key
+                FROM generate_series(
+                    DATE_TRUNC('month', NOW() - INTERVAL '$interval' + INTERVAL '1 month'),
+                    DATE_TRUNC('month', NOW()),
+                    '1 month'::interval
+                ) as m
+            )
+            SELECT
+                COALESCE(SUM(i.amount), 0) as total
+            FROM months m
+            LEFT JOIN incomes i ON TO_CHAR(i.date, 'YYYY-MM') = m.month_key
+            GROUP BY m.month_key
+            ORDER BY m.month_key ASC;
+        ";
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+        
+        return $stmt->fetchAll(PDO::FETCH_COLUMN);
+    }
 }

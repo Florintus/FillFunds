@@ -2,11 +2,15 @@
 
 namespace App\Controllers;
 
-class AboutController
+use Core\BaseController;
+
+class AboutController extends BaseController
 {
     public function index()
     {
         $pageTitle = 'О приложении';
-        include __DIR__ . '/../Views/about.php';
+        $this->renderWithLayout('about', [
+            'title' => $pageTitle
+        ]);
     }
 }

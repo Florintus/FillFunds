@@ -2,8 +2,9 @@
 namespace App\Controllers;
 
 use App\Models\Account;
+use Core\BaseController;
 
-class AccountController
+class AccountController extends BaseController
 {
     public function createForm(): void
     {

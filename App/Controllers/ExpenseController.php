@@ -3,21 +3,28 @@ namespace App\Controllers;
 
 use App\Models\Expense;
 use App\Models\Account;
+use Core\BaseController;
 
-class ExpenseController
+class ExpenseController extends BaseController
 {
+    public function index(): void
+    {
+        $expense = new Expense();
+        $expenses = $expense->getAll();
+
+        $this->render('expense/index', [
+            'expenses' => $expenses
+        ]);
+    }
+
     public function createForm(): void
     {
         $accountModel = new Account();
-        $accounts = $accountModel->getAll(); // Получаем все счета
+        $accounts = $accountModel->getAll();
 
-        require __DIR__ . '/../Views/expense/create.php'; // Передаем $accounts в представление
-    }
-        
-    public function create()
-    {
-        $accounts = new Account();
-        require_once __DIR__ . '/../Views/expense/create.php';
+        $this->render('expense/create', [
+            'accounts' => $accounts
+        ]);
     }
 
     public function store(): void
@@ -28,33 +35,30 @@ class ExpenseController
         $note = trim($_POST['note'] ?? '');
 
         if ($name === '' || $amount <= 0 || $date === '') {
-            $error = 'Все поля обязательны для заполнения';
-            require_once __DIR__ . '/../Views/expense/create.php';
+            $accountModel = new Account();
+            $accounts = $accountModel->getAll();
+            
+            $this->render('expense/create', [
+                'accounts' => $accounts,
+                'error' => 'Все поля обязательны для заполнения',
+                'old_data' => $_POST // Сохраняем введенные данные
+            ]);
             return;
         }
 
         $expense = new Expense();
         $expense->create($name, $amount, $date, $note);
 
-        header('Location: /expense');
-        exit;
+        $this->redirect('/expenses');
     }
 
-    public function index(): void
+    public function delete(): void
     {
-        $expense = new \App\Models\Expense();
-        $expenses = $expense->getAll();
-
-        require_once __DIR__ . '/../Views/expense/index.php';
-    }
-
-    public function delete() {
         $id = $_GET['id'] ?? null;
         if ($id) {
             $expense = new Expense();
             $expense->delete($id);
         }
-        header('Location: /expenses');
-        exit;
+        $this->redirect('/expenses');
     }
 }

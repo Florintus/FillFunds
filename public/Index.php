@@ -13,34 +13,41 @@ session_start();
 $router = new Router();
 // Маршруты
 $router->get('/', ['HomeController', 'index']);
-$router->get('/add', ['DashboardController', 'showAddForm']);
-$router->post('/add', ['DashboardController', 'handleAdd']);
-$router->get('/edit', ['DashboardController', 'showEditForm']);
-$router->post('/edit', ['DashboardController', 'handleEdit']);
-$router->post('/delete', ['DashboardController', 'delete']);
-$router->get('/logs', ['DashboardController', 'showLogs']);
-$router->get('/about', ['AboutController', 'index']);
+// Авторизация и регистрация
+$router->get('/login', ['AuthController', 'loginForm']);
+$router->post('/login', ['AuthController', 'login']);
+$router->get('/register', ['AuthController', 'registerForm']);
+$router->post('/register', ['AuthController', 'register']);
+$router->get('/logout', ['AuthController', 'logout']);
+// Панель управления
+$router->protectedget('/add', ['DashboardController', 'showAddForm']);
+$router->protectedpost('/add', ['DashboardController', 'handleAdd']);
+$router->protectedget('/edit', ['DashboardController', 'showEditForm']);
+$router->protectedpost('/edit', ['DashboardController', 'handleEdit']);
+$router->protectedpost('/delete', ['DashboardController', 'delete']);
+$router->protectedget('/logs', ['DashboardController', 'showLogs']);
+$router->protectedget('/about', ['AboutController', 'index']);
 // Счета
-$router->get('/accounts/create', ['AccountController', 'createForm']);
-$router->post('/accounts/store', ['AccountController', 'store']);
-$router->get('/accounts', ['AccountController', 'index']);
+$router->protectedget('/accounts/create', ['AccountController', 'createForm']);
+$router->protectedpost('/accounts/store', ['AccountController', 'store']);
+$router->protectedget('/accounts', ['AccountController', 'index']);
 // Расходы
-$router->get('/expenses', ['ExpenseController', 'index']);
-$router->get('/expenses/create', ['ExpenseController', 'createForm']);
-$router->get('/expenses/delete', ['ExpenseController', 'delete']);
+$router->protectedget('/expenses', ['ExpenseController', 'index']);
+$router->protectedget('/expenses/create', ['ExpenseController', 'createForm']);
+$router->protectedget('/expenses/delete', ['ExpenseController', 'delete']);
 // Доходы
-$router->get('/incomes', ['IncomeController', 'index']);
-$router->get('/incomes/create', ['IncomeController', 'createForm']);
-$router->get('/incomes/delete', ['IncomeController', 'delete']);
-$router->post('/incomes/store', ['IncomeController', 'store']);
-$router->post('/incomes/delete', ['IncomeController', 'delete']);
+$router->protectedget('/incomes', ['IncomeController', 'index']);
+$router->protectedget('/incomes/create', ['IncomeController', 'createForm']);
+$router->protectedget('/incomes/delete', ['IncomeController', 'delete']);
+$router->protectedpost('/incomes/store', ['IncomeController', 'store']);
+$router->protectedpost('/incomes/delete', ['IncomeController', 'delete']);
 // Категории
-$router->get('/categories', ['CategoryController', 'index']);
-$router->get('/categories/create', ['CategoryController', 'createForm']);
-$router->post('/categories/store', ['CategoryController', 'create']);
-$router->get('/categories/edit', ['CategoryController', 'editForm']);
-$router->post('/categories/update', ['CategoryController', 'update']);
-$router->post('/categories/delete', ['CategoryController', 'delete']);
+$router->protectedget('/categories', ['CategoryController', 'index']);
+$router->protectedget('/categories/create', ['CategoryController', 'createForm']);
+$router->protectedpost('/categories/store', ['CategoryController', 'create']);
+$router->protectedget('/categories/edit', ['CategoryController', 'editForm']);
+$router->protectedpost('/categories/update', ['CategoryController', 'update']);
+$router->protectedpost('/categories/delete', ['CategoryController', 'delete']);
 
 //Обработка запросов
 $uri = $_SERVER['REQUEST_URI'];

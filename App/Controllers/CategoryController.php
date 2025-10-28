@@ -3,8 +3,9 @@
 namespace App\Controllers;
 
 use App\Models\Category;
+use Core\BaseController;
 
-class CategoryController
+class CategoryController extends BaseController
 {
         public function index(): void
     {

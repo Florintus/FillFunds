@@ -4,367 +4,320 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Добавить доход - FillFunds</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { 
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; 
-            background-color: #f9fafb;
-            color: #111827;
-            line-height: 1.6;
+        :root {
+            --background: #f9fafb;
+            --text-color: #111827;
+            --primary: #2563eb;
+            --secondary: #6b7280;
+            --card-bg: #ffffff;
+            --input-bg: #ffffff;
+            --input-border: #d1d5db;
+            --error-bg: #fee2e2;
+            --error-color: #991b1b;
         }
-        .container { max-width: 1024px; margin: 0 auto; padding: 2rem 1rem; }
-        .card { background: white; padding: 2rem; border-radius: 1rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        .form-group { margin-bottom: 1.5rem; }
-        .form-label { display: block; font-weight: 500; margin-bottom: 0.5rem; color: #374151; }
-        .form-input, .form-select, .form-textarea { 
-            width: 100%; 
-            padding: 0.75rem; 
-            border: 1px solid #d1d5db; 
-            border-radius: 0.5rem; 
-            font-size: 1rem;
-            transition: border-color 0.2s;
+
+        .dark {
+            --background: #1f2937;
+            --text-color: #f3f4f6;
+            --primary: #3b82f6;
+            --secondary: #9ca3af;
+            --card-bg: #374151;
+            --input-bg: #4b5563;
+            --input-border: #6b7280;
+            --error-bg: #7f1d1d;
+            --error-color: #f87171;
         }
-        .form-input:focus, .form-select:focus, .form-textarea:focus { 
-            outline: none; 
-            border-color: #10b981; 
-            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1); 
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
-        .btn { 
-            padding: 0.75rem 1.5rem; 
-            border: none; 
-            border-radius: 0.5rem; 
-            font-weight: 500; 
-            cursor: pointer; 
-            transition: all 0.2s;
+
+        body {
+            background: var(--background);
+            color: var(--text-color);
+            font-family: Arial, sans-serif;
+            line-height: 1.5;
+            padding: 1rem;
+        }
+
+        a {
+            color: var(--primary);
             text-decoration: none;
-            display: inline-block;
-            text-align: center;
         }
-        .btn-primary { 
-            background: linear-gradient(to right, #10b981, #059669); 
-            color: white; 
+
+        a:hover {
+            text-decoration: underline;
         }
-        .btn-primary:hover { 
-            background: linear-gradient(to right, #059669, #047857); 
-            transform: translateY(-1px);
-        }
-        .btn-secondary { 
-            background: #f3f4f6; 
-            color: #374151; 
-        }
-        .btn-secondary:hover { background: #e5e7eb; }
-        .header { 
-            background: white; 
-            padding: 1rem 0; 
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1); 
-            margin-bottom: 2rem;
-        }
-        .header-content { 
-            max-width: 1200px; 
-            margin: 0 auto; 
-            padding: 0 1rem; 
-            display: flex; 
-            align-items: center; 
+
+        header.header {
+            background: var(--primary);
+            color: #fff;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
             justify-content: space-between;
         }
-        .logo { 
-            display: flex; 
-            align-items: center; 
-            gap: 0.75rem; 
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.2rem;
+            font-weight: bold;
         }
-        .logo-icon { 
-            width: 40px; 
-            height: 40px; 
-            background: linear-gradient(135deg, #3b82f6, #8b5cf6); 
-            border-radius: 0.75rem; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            color: white; 
-            font-weight: bold; 
-            font-size: 1.125rem;
+
+        .logo-icon {
+            background: #fff;
+            color: var(--primary);
+            font-weight: bold;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 0.5rem;
         }
-        .logo-text { font-size: 1.5rem; font-weight: bold; color: #111827; }
-        .breadcrumb { 
-            display: flex; 
-            align-items: center; 
-            gap: 0.5rem; 
-            margin-bottom: 2rem; 
-            color: #6b7280;
+
+        .container {
+            max-width: 700px;
+            margin: 2rem auto;
         }
-        .breadcrumb a { color: #6b7280; text-decoration: none; }
-        .breadcrumb a:hover { color: #3b82f6; }
-        .page-header { 
-            display: flex; 
-            align-items: center; 
-            gap: 0.75rem; 
-            margin-bottom: 2rem; 
+
+        .breadcrumb {
+            font-size: 0.9rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
         }
-        .page-icon { 
-            width: 48px; 
-            height: 48px; 
-            background: linear-gradient(135deg, #10b981, #059669); 
-            border-radius: 0.75rem; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            color: white;
+
+        .page-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
         }
-        .page-title { font-size: 2rem; font-weight: bold; color: #111827; }
-        .page-subtitle { color: #6b7280; margin-top: 0.25rem; }
-        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-        .form-actions { 
-            display: flex; 
-            gap: 1rem; 
-            margin-top: 2rem; 
+
+        .page-icon {
+            margin-right: 0.75rem;
+            color: var(--primary);
         }
-        .error { 
-            background: #fef2f2; 
-            color: #dc2626; 
-            padding: 1rem; 
-            border-radius: 0.5rem; 
-            margin-bottom: 1.5rem; 
-            border: 1px solid #fecaca;
+
+        .page-title {
+            font-size: 1.5rem;
+            font-weight: bold;
         }
-        @media (max-width: 768px) { 
-            .form-row { grid-template-columns: 1fr; }
-            .form-actions { flex-direction: column; }
-            .header-content { flex-direction: column; gap: 1rem; }
+
+        .page-subtitle {
+            color: var(--secondary);
+            font-size: 0.95rem;
         }
-        .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
-        .card-hover { transition: all 0.3s ease; }
-        .card-hover:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
-        
-        /* Dark theme styles */
-        .dark {
-            color-scheme: dark;
+
+        .alert {
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
         }
-        .dark body {
-            background-color: #0f172a;
-            color: #f1f5f9;
+
+        .alert-error {
+            background: var(--error-bg);
+            color: var(--error-color);
         }
-        .dark .card {
-            background-color: #1e293b;
+
+        .card {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
-        .dark .header {
-            background-color: #1e293b;
+
+        .form-row {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
         }
-        .dark .logo-text {
-            color: #f1f5f9;
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            margin-bottom: 1rem;
         }
-        .dark .page-title {
-            color: #f1f5f9;
+
+        .form-label {
+            margin-bottom: 0.5rem;
+            font-weight: bold;
         }
-        .dark .form-label {
-            color: #94a3b8;
+
+        .form-input,
+        .form-select,
+        .form-textarea {
+            background: var(--input-bg);
+            border: 1px solid var(--input-border);
+            border-radius: 4px;
+            padding: 0.5rem;
+            color: var(--text-color);
         }
-        .dark .form-input, .dark .form-select, .dark .form-textarea {
-            background-color: #374151;
-            border-color: #4b5563;
-            color: #f1f5f9;
+
+        .form-textarea {
+            resize: vertical;
         }
-        .dark .btn-secondary {
-            background: #374151;
-            color: #f1f5f9;
+
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.3);
         }
-        .dark .btn-secondary:hover {
+
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .btn {
+            display: inline-block;
+            text-align: center;
+            padding: 0.75rem;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: #fff;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background: #1d4ed8;
+        }
+
+        .btn-secondary {
+            background: var(--secondary);
+            color: #fff;
+            border: none;
+        }
+
+        .btn-secondary:hover {
             background: #4b5563;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: 2px solid #fff;
+            color: #fff;
+            border-radius: 4px;
+            padding: 0.3rem 0.6rem;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin-left: auto;
+        }
+
+        .theme-toggle:hover {
+            background: rgba(255,255,255,0.1);
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <div class="header-content">
-            <div class="logo">
-                <div class="logo-icon">F</div>
-                <div class="logo-text">FillFunds</div>
-            </div>
+
+<header class="header">
+    <div class="logo">
+        <div class="logo-icon">F</div>
+        FillFunds
+    </div>
+    <button class="theme-toggle" onclick="toggleTheme()">Тема</button>
+</header>
+
+<main class="container">
+    <nav class="breadcrumb">
+        <a href="#">Главная</a>
+        <span>→</span>
+        <a href="#">Доходы</a>
+        <span>→</span>
+        <span>Добавить доход</span>
+    </nav>
+
+    <div class="page-header">
+        <div class="page-icon">💰</div>
+        <div>
+            <h1 class="page-title">Добавить доход</h1>
+            <p class="page-subtitle">Создайте новую запись о доходе</p>
         </div>
-    </header>
+    </div>
 
-    <!-- Main Content -->
-    <main class="container">
-        <!-- Breadcrumb -->
-        <nav class="breadcrumb">
-            <a href="/">Главная</a>
-            <span>→</span>
-            <a href="/incomes">Доходы</a>
-            <span>→</span>
-            <span>Добавить доход</span>
-        </nav>
-
-        <!-- Page Header -->
-        <div class="page-header">
-            <div class="page-icon">
-                <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
-                </svg>
-            </div>
-            <div>
-                <h1 class="page-title">Добавить доход</h1>
-                <p class="page-subtitle">Создайте новую запись о доходе</p>
-            </div>
-        </div>
-
-        <!-- Error Message -->
-        <?php if (!empty($error)): ?>
-            <div class="error">
-                <?= htmlspecialchars($error) ?>
-            </div>
-        <?php endif; ?>
-
-        <!-- Form Card -->
-        <div class="card">
-            <form method="post" action="/incomes/store">
-                <div class="form-row">
-                    <!-- Date -->
-                    <div class="form-group">
-                        <label for="date" class="form-label">Дата дохода</label>
-                        <input 
-                            type="date" 
-                            id="date"
-                            name="date" 
-                            required 
-                            value="<?= date('Y-m-d') ?>"
-                            class="form-input"
-                        >
-                    </div>
-
-                    <!-- Amount -->
-                    <div class="form-group">
-                        <label for="amount" class="form-label">Сумма дохода</label>
-                        <input 
-                            type="number" 
-                            id="amount"
-                            name="amount" 
-                            step="0.01" 
-                            required 
-                            class="form-input"
-                            placeholder="0.00"
-                        >
-                    </div>
-                </div>
-
-                <!-- Account -->
+    <div class="card">
+        <form method="post">
+            <div class="form-row">
                 <div class="form-group">
-                    <label for="account" class="form-label">Счет зачисления</label>
-                    <select 
-                        id="account"
-                        name="account" 
-                        required 
-                        class="form-select"
-                    >
-                        <option value="">Выберите счет</option>
-                        <?php foreach ($accounts as $account): ?>
-                            <option value="<?= htmlspecialchars($account['id']) ?>">
-                                <?= htmlspecialchars($account['name']) ?>
-                            </option>
-                        <?php endforeach; ?>
-                    </select>
+                    <label for="date" class="form-label">Дата дохода</label>
+                    <input type="date" id="date" name="date" required class="form-input">
                 </div>
 
-                <div class="form-row">
-                    <!-- Category -->
-                    <div class="form-group">
-                        <label for="category" class="form-label">Категория</label>
-                        <input 
-                            type="text" 
-                            id="category"
-                            name="category" 
-                            required 
-                            class="form-input"
-                            placeholder="Например: Зарплата, Фриланс, Инвестиции"
-                        >
-                    </div>
-
-                    <!-- Subcategory -->
-                    <div class="form-group">
-                        <label for="subcategory" class="form-label">Подкатегория</label>
-                        <input 
-                            type="text" 
-                            id="subcategory"
-                            name="subcategory" 
-                            class="form-input"
-                            placeholder="Уточните категорию"
-                        >
-                    </div>
-                </div>
-
-                <!-- Unit -->
                 <div class="form-group">
-                    <label for="unit" class="form-label">Единица измерения</label>
-                    <input 
-                        type="text" 
-                        id="unit"
-                        name="unit" 
-                        class="form-input"
-                        placeholder="час, проект, месяц"
-                    >
+                    <label for="amount" class="form-label">Сумма дохода</label>
+                    <input type="number" id="amount" name="amount" step="0.01" required class="form-input" placeholder="0.00">
                 </div>
+            </div>
 
-                <!-- Description -->
+            <div class="form-group">
+                <label for="account" class="form-label">Счет зачисления</label>
+                <select id="account" name="account" required class="form-select">
+                    <option value="">Выберите счет</option>
+                    <option>Карта</option>
+                    <option>Наличные</option>
+                </select>
+            </div>
+
+            <div class="form-row">
                 <div class="form-group">
-                    <label for="description" class="form-label">Описание</label>
-                    <textarea 
-                        id="description"
-                        name="description" 
-                        rows="4"
-                        class="form-textarea"
-                        placeholder="Дополнительная информация о доходе"
-                    ></textarea>
+                    <label for="category" class="form-label">Категория</label>
+                    <input type="text" id="category" name="category" required class="form-input" placeholder="Зарплата, Фриланс, Инвестиции">
                 </div>
 
-                <!-- Action Buttons -->
-                <div class="form-actions">
-                    <button type="submit" class="btn btn-primary" style="flex: 1;">
-                        ✓ Сохранить доход
-                    </button>
-                    <a href="/incomes" class="btn btn-secondary" style="flex: 1;">
-                        ← Отменить
-                    </a>
+                <div class="form-group">
+                    <label for="subcategory" class="form-label">Подкатегория</label>
+                    <input type="text" id="subcategory" name="subcategory" class="form-input" placeholder="Уточните категорию">
                 </div>
-            </form>
-        </div>
+            </div>
 
-        <!-- Back Link -->
-        <div style="margin-top: 2rem;">
-            <a href="/incomes" style="color: #6b7280; text-decoration: none;">
-                ← Назад к списку доходов
-            </a>
-        </div>
-    </main>
+            <div class="form-group">
+                <label for="unit" class="form-label">Единица измерения</label>
+                <input type="text" id="unit" name="unit" class="form-input" placeholder="час, проект, месяц">
+            </div>
 
-    <script type="module">
-        // Theme switching functionality (simplified)
-        if (localStorage.getItem('theme') === 'dark') {
-            document.documentElement.classList.add('dark');
-        }
+            <div class="form-group">
+                <label for="description" class="form-label">Описание</label>
+                <textarea id="description" name="description" rows="4" class="form-textarea" placeholder="Дополнительная информация о доходе"></textarea>
+            </div>
 
-        // Form enhancements
-        document.querySelector('form').addEventListener('submit', function(e) {
-            const submitButton = this.querySelector('button[type="submit"]');
-            submitButton.innerHTML = `
-                <svg style="display: inline-block; width: 20px; height: 20px; margin-right: 8px; animation: spin 1s linear infinite;" fill="none" viewBox="0 0 24 24">
-                    <circle style="opacity: 0.25;" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                    <path style="opacity: 0.75;" fill="currentColor" d="m4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                </svg>
-                Сохранение...
-            `;
-            submitButton.disabled = true;
-        });
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">✓ Сохранить доход</button>
+                <a href="#" class="btn btn-secondary">← Отменить</a>
+            </div>
+        </form>
+    </div>
 
-        // Add spinner animation
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes spin {
-                0% { transform: rotate(0deg); }
-                100% { transform: rotate(360deg); }
-            }
-        `;
-        document.head.appendChild(style);
-    </script>
+    <div style="margin-top: 2rem;">
+        <a href="#">← Назад к списку доходов</a>
+    </div>
+</main>
+
+<script>
+function toggleTheme() {
+    document.documentElement.classList.toggle('dark');
+    const theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+    localStorage.setItem('theme', theme);
+}
+
+if (localStorage.getItem('theme') === 'dark') {
+    document.documentElement.classList.add('dark');
+}
+</script>
+
 </body>
 </html>
