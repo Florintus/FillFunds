@@ -12,16 +12,32 @@ class HomeController extends BaseController
 {
     public function index(): void
     {
+        // Проверяем авторизацию пользователя
+        if (isset($_SESSION['user_id'])) {
+            // Если пользователь авторизован, перенаправляем на dashboard
+            $this->redirect('/dashboard');
+            return;
+        }
+
+        // Если пользователь не авторизован, показываем домашнюю страницу
+        $this->showHomePage();
+    }
+
+    /**
+     * Показать домашнюю страницу для гостей
+     */
+    private function showHomePage(): void
+    {
         $expenseModel = new Expense();
         $incomeModel = new Income();
         $accountModel = new Account();
         $categoryModel = new Category();
 
-         $pageScripts = [
-        '/js/core/app.js',
-        '/js/components/chart.js',
-        '/js/pages/home.js'
-    ];
+        $pageScripts = [
+            '/js/core/app.js',
+            '/js/components/chart.js',
+            '/js/pages/home.js'
+        ];
 
         $this->render('home', [
             'totalExpenses' => $expenseModel->getTotalAmount(),
@@ -29,6 +45,21 @@ class HomeController extends BaseController
             'accounts' => $accountModel->getAll(),
             'categories' => $categoryModel->getAll(),
         ]);
+    }
+
+    /**
+     * Метод для обработки клика по логотипу (возврат на главную для авторизованных)
+     */
+    public function returnToHome(): void
+    {
+        // Проверяем, что пользователь авторизован
+        if (!isset($_SESSION['user_id'])) {
+            $this->redirect('/login');
+            return;
+        }
+
+        // Показываем домашнюю страницу даже для авторизованных пользователей
+        $this->showHomePage();
     }
 
     public function quickAddExpense(): void
